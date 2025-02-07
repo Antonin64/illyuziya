@@ -8,7 +8,7 @@ public class VisibilityChanger : MonoBehaviour
     private Collider col;
     private Plane[] cameraFrustum;
     private bool visible;
-    private int overlaps = 0;
+    private bool overlaps = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -52,7 +52,7 @@ public class VisibilityChanger : MonoBehaviour
                 } else
                 {
                     rend.enabled = true;
-                    if (overlaps == 0)
+                    if (!overlaps)
                         col.isTrigger = false;
                 }
                 visible = false;
@@ -61,15 +61,20 @@ public class VisibilityChanger : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        overlaps++;
+        if (other.gameObject.CompareTag("Player")) {
+            overlaps = true;
+        }
     }
 
     void OnTriggerExit(Collider other)
     {
-        overlaps--;
-        if (overlaps == 0 && col.isTrigger)
+        if (other.gameObject.CompareTag("Player"))
         {
-            col.isTrigger = false;
+            if (overlaps && col.isTrigger)
+            {
+                col.isTrigger = false;
+            }
+            overlaps = false;
         }
     }
 }
