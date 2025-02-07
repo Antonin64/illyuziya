@@ -13,8 +13,8 @@ public class VisibilityChanger : MonoBehaviour
     void Start()
     {
         cam = player.GetComponentInChildren<Camera>();
-        col = GetComponentInChildren<Collider>();
-        rend = GetComponentInChildren<Renderer>();
+        col = GetComponent<Collider>();
+        rend = GetComponent<Renderer>();
         cameraFrustum = GeometryUtility.CalculateFrustumPlanes(cam);
         if (GeometryUtility.TestPlanesAABB(cameraFrustum, col.bounds))
         {
@@ -30,10 +30,6 @@ public class VisibilityChanger : MonoBehaviour
     void Update()
     {
         IsTargetVisible();
-        if (col.isTrigger)
-        {
-            
-        }
     }
 
     void IsTargetVisible()
