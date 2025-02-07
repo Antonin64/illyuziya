@@ -84,7 +84,7 @@ public class VisibilityChanger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (overlaps && col.isTrigger)
+            if (overlaps && rend.enabled == true)
             {
                 col.isTrigger = false;
             }
