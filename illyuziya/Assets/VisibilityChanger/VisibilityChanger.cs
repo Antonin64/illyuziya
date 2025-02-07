@@ -3,6 +3,8 @@ using UnityEngine;
 public class VisibilityChanger : MonoBehaviour
 {
     [SerializeField] private GameObject player;
+    [SerializeField] private float renderDistance = 10f;
+    [SerializeField] private bool visibility = true;
     private Camera cam;
     private Renderer rend;
     private Collider col;
@@ -16,6 +18,11 @@ public class VisibilityChanger : MonoBehaviour
         col = GetComponent<Collider>();
         rend = GetComponent<Renderer>();
         cameraFrustum = GeometryUtility.CalculateFrustumPlanes(cam);
+        if (visibility == false)
+        {
+            rend.enabled = false;
+            col.isTrigger = true;
+        }
         if (GeometryUtility.TestPlanesAABB(cameraFrustum, col.bounds))
         {
             visible = true;
@@ -29,7 +36,14 @@ public class VisibilityChanger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        IsTargetVisible();
+        if (Vector3.Distance(cam.transform.position, transform.position) < renderDistance)
+        {
+            IsTargetVisible();
+        }
+        else
+        {
+            visible = false;
+        }
     }
 
     void IsTargetVisible()
