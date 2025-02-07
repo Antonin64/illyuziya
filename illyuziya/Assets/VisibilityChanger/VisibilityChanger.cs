@@ -62,12 +62,10 @@ public class VisibilityChanger : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         overlaps++;
-        Debug.Log("caca");
     }
 
     void OnTriggerExit(Collider other)
     {
-        Debug.Log("pipi");
         overlaps--;
         if (overlaps == 0 && col.isTrigger)
         {
