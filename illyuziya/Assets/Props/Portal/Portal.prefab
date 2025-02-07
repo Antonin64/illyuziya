@@ -66,10 +66,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100
   field of view: 60.000004
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 0.3
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RenderShadows: 1
+  m_RenderShadows: 0
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
@@ -308,8 +308,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   portal1: {fileID: 5042169938515829196}
   portal2: {fileID: 3352477567015545257}
-  material1: {fileID: 0}
-  material2: {fileID: 0}
   renderTexture1: {fileID: 0}
   renderTexture2: {fileID: 0}
   camera1: {fileID: 4713448774613676147}
@@ -503,7 +501,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100
   field of view: 60.000004
   orthographic: 0
   orthographic size: 5
@@ -542,7 +540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RenderShadows: 1
+  m_RenderShadows: 0
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0

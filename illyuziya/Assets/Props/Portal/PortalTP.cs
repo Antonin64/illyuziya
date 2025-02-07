@@ -22,8 +22,10 @@ public class PortalTP : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            other.transform.position = portal.transform.position;
-            other.transform.rotation = portal.transform.rotation;   
+            other.GetComponent<CharacterController>().enabled = false;
+            other.transform.position = portal.transform.position + (portal.transform.forward * 0.5f);
+            other.transform.rotation = portal.transform.rotation;
+            other.GetComponent<CharacterController>().enabled = true;
         }
     }
 }
