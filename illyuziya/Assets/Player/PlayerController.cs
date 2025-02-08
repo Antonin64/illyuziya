@@ -1,79 +1,84 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
-
-public class PlayerMovement : MonoBehaviour
+namespace GoThrough.Samples
 {
-    public Camera playerCamera;
-    public float walkSpeed = 6f;
-    public float runSpeed = 12f;
-    public float jumpPower = 7f;
-    public float gravity = 10f;
-    public float lookSpeed = 2f;
-    public float lookXLimit = 45f;
-    public float defaultHeight = 2f;
-    public float crouchHeight = 1f;
-    public float crouchSpeed = 3f;
-
-    private Vector3 moveDirection = Vector3.zero;
-    private float rotationX = 0;
-    private CharacterController characterController;
-    private bool canMove = true;
-
-    void Start()
+	[RequireComponent(typeof(Rigidbody))]
+	internal class PlayerController : MonoBehaviour
     {
-        characterController = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
+		public float speed = 10.0f;
+		public float gravity = 10.0f;
+		public float maxVelocityChange = 10.0f;
+		public float mouseSensitivity = 100.0f;
+        public float jumpPower = 7f;
+		public new Camera camera;
+		
+		private new Rigidbody rigidbody;
+		private bool grounded = false;
+		private float xRotation = 0.0f;
 
-    void Update()
-    {
-        Vector3 forward = transform.TransformDirection(Vector3.forward);
-        Vector3 right = transform.TransformDirection(Vector3.right);
+		void Awake()
+		{
+			this.rigidbody = this.GetComponent<Rigidbody>();
+			this.rigidbody.freezeRotation = true;
+			this.rigidbody.useGravity = false;
 
-        bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
-        float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
-        float movementDirectionY = moveDirection.y;
-        moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+			Cursor.lockState = CursorLockMode.Locked;
+		}
 
-        if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
-        {
-            moveDirection.y = jumpPower;
-        }
-        else
-        {
-            moveDirection.y = movementDirectionY;
-        }
+		private void Update()
+		{
+			float mouseX = Input.GetAxis("Mouse X") * this.mouseSensitivity * Time.deltaTime;
+			float mouseY = Input.GetAxis("Mouse Y") * this.mouseSensitivity * Time.deltaTime;
 
-        if (!characterController.isGrounded)
-        {
-            moveDirection.y -= gravity * Time.deltaTime;
-        }
+			this.xRotation -= mouseY;
+			this.xRotation = Mathf.Clamp(xRotation, -90.0f, 90.0f);
 
-        if (Input.GetKey(KeyCode.R) && canMove)
-        {
-            characterController.height = crouchHeight;
-            walkSpeed = crouchSpeed;
-            runSpeed = crouchSpeed;
-        }
-        else
-        {
-            characterController.height = defaultHeight;
-            walkSpeed = 6f;
-            runSpeed = 12f;
-        }
-        characterController.Move(moveDirection * Time.deltaTime);
+			this.camera.transform.localRotation = Quaternion.Euler(this.xRotation, 0.0f, 0.0f);
+			this.transform.Rotate(Vector3.up * mouseX, Space.Self);
+			this.rigidbody.rotation = this.transform.rotation;
 
-        if (canMove)
-        {
-            rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
-            rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
-        }
-    }
+			//Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+			//targetVelocity = this.transform.TransformDirection(targetVelocity);
+			//targetVelocity *= this.speed;
+
+			//this.transform.Translate(targetVelocity * Time.deltaTime, Space.World);
+
+            if (this.grounded && Input.GetButtonDown("Jump"))
+            {
+                this.rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
+            }
+		}
+
+		void FixedUpdate()
+		{
+			if (this.grounded)
+			{
+				// Calculate how fast we should be moving
+				Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+				targetVelocity = this.transform.TransformDirection(targetVelocity);
+				targetVelocity *= this.speed;
+
+
+				// Apply a force that attempts to reach our target velocity
+				Vector3 velocity = rigidbody.linearVelocity;
+				Vector3 velocityChange = this.transform.TransformVector(targetVelocity - velocity);
+				//Debug.Log(velocityChange);
+				velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
+				velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
+				velocityChange.y = 0;
+
+				this.rigidbody.AddForce(this.transform.InverseTransformVector(velocityChange), ForceMode.VelocityChange);
+			}
+
+			// We apply gravity manually for more tuning control
+			this.rigidbody.AddRelativeForce(new Vector3(0, -gravity * rigidbody.mass, 0));
+
+			this.grounded = false;
+		}
+
+		void OnTriggerStay()
+		{
+			this.grounded = true;
+		}
+	}
 }

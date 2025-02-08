@@ -9,6 +9,7 @@ namespace GoThrough.Samples
 		public float gravity = 10.0f;
 		public float maxVelocityChange = 10.0f;
 		public float mouseSensitivity = 100.0f;
+        public float jumpPower = 7f;
 		public new Camera camera;
 		
 		private new Rigidbody rigidbody;
@@ -41,6 +42,11 @@ namespace GoThrough.Samples
 			//targetVelocity *= this.speed;
 
 			//this.transform.Translate(targetVelocity * Time.deltaTime, Space.World);
+
+            if (this.grounded && Input.GetButtonDown("Jump"))
+            {
+                this.rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
+            }
 		}
 
 		void FixedUpdate()
