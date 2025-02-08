@@ -2163,7 +2163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingPlatform: {fileID: 6651955820722745776, guid: c17935461f292cc4799c0369940220c2, type: 3}
   firstWall: {fileID: 1141447586171393078, guid: 40d55a02674ccac42ad0c5faa69ab378, type: 3}
-  box: {fileID: 8178980395700249004, guid: 8dc7d7e3c3bdf9a4da5e4fd915b30917, type: 3}
+  box: {fileID: 2418359557681740069, guid: ebe8d3d7c8ecaab4c82af7515bb6b867, type: 3}
   player: {fileID: 1255910191}
 --- !u!1 &1583710380
 GameObject:

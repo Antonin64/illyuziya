@@ -16,7 +16,7 @@ public class ObjectGrabbable : MonoBehaviour
     {
         this.objectGrabPointTransform = objectGrabPointTransform;
         objectRigidbody.useGravity = false;
-        transform.parent = null;
+        transform.parent.parent = null;
         tag = "Picked";
     }
 
@@ -35,7 +35,7 @@ public class ObjectGrabbable : MonoBehaviour
         tag = "Pickable";
         if (onPlateform)
         {
-            transform.parent = colPlateform.transform;
+            transform.parent.parent = colPlateform.transform;
             onPlateform = false;
         }
     }
@@ -56,7 +56,7 @@ public class ObjectGrabbable : MonoBehaviour
         {
             if (!CompareTag("Picked"))
             {
-                transform.parent = collision.gameObject.transform;
+                transform.parent.parent = collision.gameObject.transform;
             } else
             {
                 onPlateform = true;
@@ -69,7 +69,7 @@ public class ObjectGrabbable : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Plateform"))
         {
-            transform.parent = null;
+            transform.parent.parent = null;
         }
     }
 }
