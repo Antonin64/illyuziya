@@ -45,6 +45,7 @@ namespace GoThrough.Samples
 
             if (this.grounded && Input.GetButtonDown("Jump"))
             {
+				Debug.Log("Jumping");
                 this.rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
             }
 		}
