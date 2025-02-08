@@ -4,8 +4,9 @@ using UnityEngine;
 public class ShapeChanger : MonoBehaviour
 {
     [SerializeField] public GameObject[] objects;
-    [SerializeField] private GameObject player;
+    [SerializeField] public GameObject player;
     [SerializeField] private float renderDistance = 10f;
+    [SerializeField] private float minimalRenderDistance = 0f;
     private int index;
     private Camera cam;
     private Collider col;
@@ -34,7 +35,7 @@ public class ShapeChanger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(cam.transform.position, transform.GetChild(0).transform.position) < renderDistance && !player.GetComponent<PlayerController>().touchPickable)  
+        if (Vector3.Distance(cam.transform.position, transform.GetChild(0).transform.position) < renderDistance && Vector3.Distance(cam.transform.position, transform.GetChild(0).transform.position) > minimalRenderDistance && !player.GetComponent<PlayerController>().touchPickable)
         {
             IsTargetVisible();
         }
