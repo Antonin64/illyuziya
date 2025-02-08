@@ -1,3 +1,4 @@
+using GoThrough.Samples;
 using UnityEngine;
 
 public class ShapeChanger : MonoBehaviour
@@ -33,7 +34,7 @@ public class ShapeChanger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(cam.transform.position, transform.GetChild(0).transform.position) < renderDistance)
+        if (Vector3.Distance(cam.transform.position, transform.GetChild(0).transform.position) < renderDistance && !player.GetComponent<PlayerController>().touchPickable)  
         {
             IsTargetVisible();
         }

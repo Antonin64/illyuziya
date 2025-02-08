@@ -53,6 +53,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.3, y: 0.1, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2938677348021460274
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4233602318273768171}
+  m_Layer: 8
+  m_Name: GrabPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4233602318273768171
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2938677348021460274}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5412490325588591555}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5412490325005954193
 GameObject:
   m_ObjectHideFlags: 0
@@ -66,6 +97,7 @@ GameObject:
   - component: {fileID: 5412490325005954192}
   - component: {fileID: 5412490325005954196}
   - component: {fileID: 4241600712111459159}
+  - component: {fileID: 512155304485369238}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -166,12 +198,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79c8697c8e429b42bbe952b70033752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  gravity: 10
+  speed: 6
+  gravity: 12
   maxVelocityChange: 10
   mouseSensitivity: 100
   jumpPower: 7
   camera: {fileID: 5412490325588591566}
+  touchPickable: 0
+--- !u!114 &512155304485369238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5412490325005954193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9afe89a0c5e07444908c79867fe327c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 5412490325588591566}
+  pickUpLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  pickUpDistance: 2
+  objectGrabPointTransform: {fileID: 4233602318273768171}
+  objectGrabbable: {fileID: 0}
 --- !u!1 &5412490325588591567
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,7 +256,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4233602318273768171}
   m_Father: {fileID: 5412490325005954199}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &5412490325588591566
