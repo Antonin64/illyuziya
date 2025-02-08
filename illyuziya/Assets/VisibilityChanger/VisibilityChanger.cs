@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class VisibilityChanger : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+    [SerializeField] public GameObject player;
     [SerializeField] private float renderDistance = 10f;
     [SerializeField] private bool visibility = true;
     private Camera cam;

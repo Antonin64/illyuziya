@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ShapeChanger : MonoBehaviour
 {
-    [SerializeField] private GameObject[] objects;
+    [SerializeField] public GameObject[] objects;
     [SerializeField] private GameObject player;
     [SerializeField] private float renderDistance = 10f;
     private int index;
