@@ -29,6 +29,10 @@ namespace GoThrough.Samples
             {
                 touchPickable = true;
             }
+            if (collision.gameObject.CompareTag("Plateform"))
+            {
+                transform.parent = collision.gameObject.transform;
+            }
         }
 
         private void OnCollisionExit(Collision collision)
@@ -36,6 +40,10 @@ namespace GoThrough.Samples
             if (collision.gameObject.CompareTag("Pickable"))
             {
                 touchPickable = false;
+            }
+            if (collision.gameObject.CompareTag("Plateform"))
+            {
+                transform.parent = null;
             }
         }
 

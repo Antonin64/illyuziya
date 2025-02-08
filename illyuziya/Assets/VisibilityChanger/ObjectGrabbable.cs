@@ -22,9 +22,7 @@ public class ObjectGrabbable : MonoBehaviour
         this.objectGrabPointTransform = null;
         objectRigidbody.useGravity = true;
         tag = "Pickable";
-        Quaternion rotation = Quaternion.Euler(transform.eulerAngles);
-        direction = rotation * direction;
-        objectRigidbody.AddRelativeForce(direction * launchPower);
+        objectRigidbody.AddForce(direction * launchPower);
     }
 
     public void Drop()
