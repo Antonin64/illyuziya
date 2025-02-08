@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4713448774613676147}
   - component: {fileID: 159045988071575154}
   - component: {fileID: 5211846144799459749}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 4519490817199799093}
   - component: {fileID: 6353278373918997163}
   - component: {fileID: 8929694018075785507}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Portal2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,6 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   portal1: {fileID: 5042169938515829196}
   portal2: {fileID: 3352477567015545257}
+  playerCamera: {fileID: 0}
   renderTexture1: {fileID: 0}
   renderTexture2: {fileID: 0}
   camera1: {fileID: 4713448774613676147}
@@ -325,7 +326,7 @@ GameObject:
   - component: {fileID: 8074367791675287348}
   - component: {fileID: 8430635020347208417}
   - component: {fileID: 7013302331547454789}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Portal1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,7 +448,7 @@ GameObject:
   - component: {fileID: 6305564003476409386}
   - component: {fileID: 6326922198909484337}
   - component: {fileID: 3618850074633811017}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}

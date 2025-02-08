@@ -23,7 +23,8 @@ public class PortalTP : MonoBehaviour
         if (other.tag == "Player")
         {
             other.GetComponent<CharacterController>().enabled = false;
-            other.transform.position = portal.transform.position + (portal.transform.forward * 0.5f);
+            other.transform.position = portal.transform.position;
+            //offset the player a little bit depending on his movement so it doesn't get stuck
             other.transform.rotation = portal.transform.rotation;
             other.GetComponent<CharacterController>().enabled = true;
         }
