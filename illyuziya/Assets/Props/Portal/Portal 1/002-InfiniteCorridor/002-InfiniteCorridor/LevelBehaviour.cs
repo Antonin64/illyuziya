@@ -11,11 +11,16 @@ public class LevelBehaviour : MonoBehaviour
 
     public int portalpassed = 0;
 
+    public AudioSource audioSource;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "Player")
         {
             portalpassed++;
+            if (portalpassed == 1) {
+                audioSource.Play();
+            }
             //pass to next level if portalpassed is 20
         }
     }
