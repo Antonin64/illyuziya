@@ -73,6 +73,6 @@ public class LevelToto : MonoBehaviour
         box2Instance.GetComponent<ShapeChanger>().player = player;
         box2Instance.transform.position += this.gameObject.transform.position;
 
-        player.transform.position = transform.position + new Vector3(0, 1, 0);
+        player.transform.position = transform.position + new Vector3(8, 1, 0);
     }
 }
