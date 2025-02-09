@@ -9,19 +9,18 @@ public class MovingPlateform : MonoBehaviour
     private Vector3 initialPos;
     private bool arrived = false;
 
-    private void Start()
-    {
-        initialPos = transform.position;
-    }
     void Update()
     {
-        if (transform.position.x + initialPos.x > destination.x + initialPos.x)
+        if (move)
         {
-            arrived = true;
-        }
-        if (arrived == false && move)
-        {
-            transform.position += speed * Time.deltaTime * destination.normalized;
+            if (transform.position.x + initialPos.x > destination.x + initialPos.x + transform.parent.position.x)
+            {
+                arrived = true;
+            }
+            if (arrived == false && move)
+            {
+                transform.position += speed * Time.deltaTime * destination.normalized;
+            }
         }
     }
 
@@ -29,7 +28,9 @@ public class MovingPlateform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && move == false && arrived == false)
         {
+            initialPos = transform.position;
             move = true;
+            Debug.Log("a");
         }
     }
 }
